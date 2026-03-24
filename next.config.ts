@@ -1,11 +1,22 @@
 import type { NextConfig } from "next";
 import withPWA from "next-pwa";
+import { getSecurityHeaders } from "./src/utils/security";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   typedRoutes: true,
   // Empty turbopack config to silence the warning
   turbopack: {},
+
+  async headers() {
+    return [
+      {
+        // Apply security headers to every route
+        source: "/:path*",
+        headers: getSecurityHeaders(),
+      },
+    ];
+  },
 };
 
 export default withPWA({
