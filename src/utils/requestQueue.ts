@@ -9,7 +9,7 @@ interface QueueTask<T> {
   task: () => Promise<T>;
   maxRetries: number;
   baseDelayMs: number;
-  resolve: (value: T) => void;
+  resolve: (value: unknown) => void;
   reject: (error: unknown) => void;
 }
 
@@ -24,10 +24,10 @@ export class RequestQueue {
 
     return new Promise<T>((resolve, reject) => {
       this.queue.push({
-        task,
+        task: task as () => Promise<unknown>,
         maxRetries,
         baseDelayMs,
-        resolve,
+        resolve: resolve as (value: unknown) => void,
         reject,
       });
 

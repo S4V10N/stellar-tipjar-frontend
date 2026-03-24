@@ -11,8 +11,8 @@ export function useThrottle<T extends (...args: never[]) => void>(
 ): T {
   const lastCalledAtRef = useRef(0);
 
-  return useCallback(
-    ((...args: Parameters<T>) => {
+  const throttled = useCallback(
+    (...args: Parameters<T>) => {
       const now = Date.now();
       if (now - lastCalledAtRef.current < delayMs) {
         return;
@@ -20,7 +20,9 @@ export function useThrottle<T extends (...args: never[]) => void>(
 
       lastCalledAtRef.current = now;
       callback(...args);
-    }) as T,
+    },
     [callback, delayMs],
   );
+
+  return throttled as T;
 }
