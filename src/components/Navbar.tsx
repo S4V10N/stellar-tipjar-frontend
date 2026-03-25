@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { NotificationBadge } from "@/components/NotificationBadge";
 import { WalletConnector } from "@/components/WalletConnector";
 
 const navLinks = [
@@ -26,7 +27,10 @@ export function Navbar() {
             </Link>
           ))}
         </div>
-        <WalletConnector />
+        <div className="flex items-center gap-2">
+          <NotificationBadge />
+          <WalletConnector />
+        </div>
       </nav>
     </header>
   );
