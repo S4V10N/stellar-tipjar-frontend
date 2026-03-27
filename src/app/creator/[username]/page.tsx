@@ -14,6 +14,7 @@ import { formatUsername } from "@/utils/format";
 import { generateAvatarUrl } from "@/utils/imageUtils";
 import { buildMetadata, creatorProfileJsonLd } from "@/utils/seo";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { PortfolioSection } from "@/components/portfolio/PortfolioSection";
 
 interface CreatorPageProps {
   params: {
